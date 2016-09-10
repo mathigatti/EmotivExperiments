@@ -1,0 +1,71 @@
+K 25
+svn:wc:ra_dav:version-url
+V 74
+/svn/!svn/ver/125/trunk/SSVEP/experimento/multi_process_sec_guardar/emotiv
+END
+bindings.cc
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/125/trunk/SSVEP/experimento/multi_process_sec_guardar/emotiv/bindings.cc
+END
+EdfWriter.py
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/125/trunk/SSVEP/experimento/multi_process_sec_guardar/emotiv/EdfWriter.py
+END
+Makefile.linux64
+K 25
+svn:wc:ra_dav:version-url
+V 91
+/svn/!svn/ver/125/trunk/SSVEP/experimento/multi_process_sec_guardar/emotiv/Makefile.linux64
+END
+__init__.py
+K 25
+svn:wc:ra_dav:version-url
+V 86
+/svn/!svn/ver/125/trunk/SSVEP/experimento/multi_process_sec_guardar/emotiv/__init__.py
+END
+setup.py
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/125/trunk/SSVEP/experimento/multi_process_sec_guardar/emotiv/setup.py
+END
+Emotiv_edf.py
+K 25
+svn:wc:ra_dav:version-url
+V 88
+/svn/!svn/ver/125/trunk/SSVEP/experimento/multi_process_sec_guardar/emotiv/Emotiv_edf.py
+END
+EdfReader.py
+K 25
+svn:wc:ra_dav:version-url
+V 87
+/svn/!svn/ver/125/trunk/SSVEP/experimento/multi_process_sec_guardar/emotiv/EdfReader.py
+END
+emotiv_simulator.py
+K 25
+svn:wc:ra_dav:version-url
+V 94
+/svn/!svn/ver/125/trunk/SSVEP/experimento/multi_process_sec_guardar/emotiv/emotiv_simulator.py
+END
+Emotiv.py
+K 25
+svn:wc:ra_dav:version-url
+V 84
+/svn/!svn/ver/125/trunk/SSVEP/experimento/multi_process_sec_guardar/emotiv/Emotiv.py
+END
+Emoptiv.py
+K 25
+svn:wc:ra_dav:version-url
+V 85
+/svn/!svn/ver/125/trunk/SSVEP/experimento/multi_process_sec_guardar/emotiv/Emoptiv.py
+END
+Makefile
+K 25
+svn:wc:ra_dav:version-url
+V 83
+/svn/!svn/ver/125/trunk/SSVEP/experimento/multi_process_sec_guardar/emotiv/Makefile
+END

@@ -1,0 +1,46 @@
+PYTHON=python
+
+.PHONY: clean all
+
+ifeq ($(THISDIR),)
+THISDIR:=$(CURDIR)
+endif
+
+PLATFORM = $(shell gcc -dumpmachine)
+UNAME = $(shell uname)
+MACHINE = $(shell uname -m)
+
+ifeq "$(PLATFORM)" "mingw32"
+	EMOTIV_ROOT=C:\Program\ Files\ (x86)\Emotiv\ Education\ Edition\ SDK_v1.0.0.5-PREMIUM\doc\examples
+	EMOTIV_INCLUDE=$(EMOTIV_ROOT)\include
+	EMOTIV_LIBS_FOLDER=$(EMOTIV_ROOT)\lib
+	EMOTIV_LIBS=-ledk
+	MCFLAGS=-m32
+endif
+
+ifeq "$(UNAME)" "Linux"
+	EMOTIV_ROOT = ~/EmotivResearch_1.0.0.5
+	EMOTIV_INCLUDE=$(EMOTIV_ROOT)/doc/examples_Qt/example5/
+	EMOTIV_LIBS_FOLDER=$(EMOTIV_ROOT)/lib
+	EMOTIV_LIBS=-ledk -ledk_utils
+	MCFLAGS=-m32
+endif
+
+ifeq "$(UNAME)" "Darwin"
+	EMOTIV_ROOT=/Applications/EmotivResearch/docs/Examples/
+	EMOTIV_INCLUDE=$(EMOTIV_ROOT)/Xcode/include
+	EMOTIV_LIBS_FOLDER=$(EMOTIV_ROOT)/EmotivSDKLib
+	EMOTIV_LIBS=-ledk
+	MCFLAGS=
+endif
+
+CC=g++
+all: clean emotiv.so
+
+emotiv.so: setup.py 
+	CC=g++ CFLAGS=$(MCFLAGS) $(PYTHON) setup.py -I $(EMOTIV_INCLUDE) -L $(EMOTIV_LIBS_FOLDER) $(EMOTIV_LIBS) build
+	cp build/lib.*/$@ .
+	
+clean:
+	rm -rf build/
+	rm -f emotiv.so
