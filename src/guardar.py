@@ -17,9 +17,11 @@ def save_data(salidaDatos, q_marcas):
 	while not salida:
 		if not q_marcas.empty():
 			marca = q_marcas.get()
-			if marca == 300:
+			if marca == 42:
 				salida = True
+			print "Antes de mandar ", marca, time.time()
 			emo.mark(0, marca)
+			print "Desp de mandar ", marca, time.time()
 
 	time.sleep(2)
 
