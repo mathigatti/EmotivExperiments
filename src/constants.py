@@ -1,0 +1,5 @@
+angry = "angry"
+pacman = "pacman"
+pacmanImage = "./estimulo/pacman.png"
+birdImage = "./estimulo/pajaro.png"
+crossImage = "./estimulo/cruz.png"

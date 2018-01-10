@@ -5,6 +5,7 @@ import datetime
 import time
 import gtk
 from marcas import *
+from constants import *
 
 # Marcas
 marca_espacio       = 11
@@ -52,10 +53,10 @@ def loadInitialScreenAndFlip(win, pantalla_inicio, negro, res):
 
 def loadEndingExperimentScreenAndFlip(win, negro, res, cond):
     fondo = visual.Rect(win, width=res[0]+10, height=res[1]+10, fillColor=negro, fillColorSpace='hex')
-    if cond == 'pacman':
+    if cond == pacman:
         msg1 = visual.TextStim(win, text="MUY BIEN!! FIN DE DE LA PRIMERA PARTE", color=blanco, colorSpace='hex',alignHoriz='center', alignVert='center')
         msg2 = visual.TextStim(win, text="Muchas gracias por participar!", pos=(0.0,(-res[1]*0.05)), color=blanco, colorSpace='hex')
-    elif cond == 'angry':
+    elif cond == angry:
         msg1 = visual.TextStim(win, text="MUY BIEN!! YA TERMINO EL JUEGO", color=blanco, colorSpace='hex',alignHoriz='center', alignVert='center')
         msg2 = visual.TextStim(win, text="Muchas gracias por participar!", pos=(0.0,(-res[1]*0.05)), color=blanco, colorSpace='hex')
 
@@ -88,10 +89,10 @@ def loadStimulusImage(win,image):
 
 
 def loadInterStimulusImage(win):
-    msg = visual.ImageStim(win, image="./estimulo/cruz.png", units= 'deg', size = (2.0,2.0), contrast=1.0, opacity=1.0)
+    msg = visual.ImageStim(win, image=crossImage, units= 'deg', size = (2.0,2.0), contrast=1.0, opacity=1.0)
     msg.draw()
 
-def loadInstructionsAndFlip(win, negro, blanco, res):
+def loadInstructionsAndFlip(win, negro, blanco, res, i):
     fondo = visual.Rect(win, width=res[0]+10, height=res[1]+10, fillColor=negro, fillColorSpace='hex')
     msg1 = visual.TextStim(win, text="BLOQUE " + str(i/2+1), pos=(-200, 240), color=blanco, colorSpace='hex')
     msg2 = visual.TextStim(win, text="tecla [ n ] para continuar", color=blanco, colorSpace='hex',alignHoriz='center', alignVert='center')
@@ -107,7 +108,7 @@ def loadInstructionsAndFlip(win, negro, blanco, res):
 def isDivisibleBy(i,n):
     return i % n == 0
 
-def preparationScreensExperiment(esperar, terminar, termino_bloque, isFirst, negro, blanco, res, pantalla_inicio, win, core, Nsess, dataFile):
+def preparationScreensExperiment(esperar, terminar, termino_bloque, negro, blanco, gris, res, pantalla_inicio, win, core, Nsess, dataFile, i, p, q):
 
     win.clearBuffer()
     while esperar:
@@ -120,7 +121,7 @@ def preparationScreensExperiment(esperar, terminar, termino_bloque, isFirst, neg
             loadInitialScreenAndFlip(win, pantalla_inicio, negro, res)
             event.waitKeys(keyList=['return'])
 
-            loadInstructionsAndFlip(win, negro, blanco, res)
+            loadInstructionsAndFlip(win, negro, blanco, res, i)
             keys = event.waitKeys(keyList=['q','t','n'])
 
             for key in keys:
@@ -151,9 +152,9 @@ def preparationScreensExperiment(esperar, terminar, termino_bloque, isFirst, neg
             time.sleep(3)
             esperar = 0
 
-    return esperar, terminar, termino_bloque, isFirst, dataFile
+    return esperar, terminar, termino_bloque, dataFile
 
-def preparationScreens(esperar, terminar, termino_bloque, isFirst, negro, blanco, res, pantalla_inicio, win, core, Nsess):
+def preparationScreens(esperar, terminar, termino_bloque, isFirst, negro, blanco, gris, res, pantalla_inicio, win, core, Nsess, i):
     while esperar:
         if isFirst:
             isFirst = False
@@ -166,7 +167,7 @@ def preparationScreens(esperar, terminar, termino_bloque, isFirst, negro, blanco
                 loadInterStimulusImageAndFlip(win)
                 core.wait(1)
 
-            loadInstructionsAndFlip(win, negro, blanco, res)
+            loadInstructionsAndFlip(win, negro, blanco, res, i)
             keys = event.waitKeys(keyList=['q','t','n'])
 
             for key in keys:
@@ -190,7 +191,7 @@ def preparationScreens(esperar, terminar, termino_bloque, isFirst, negro, blanco
 
     return esperar, terminar, termino_bloque, isFirst
 
-def anIterationOfTheExperimentGame(primera_iter, initTime, win, imagen, ISI, StimDur, initTimeStamp, q, p):
+def anIterationOfTheExperimentGame(primera_iter, initTime, win, imagen, ISI, StimDur, initTimeStamp, q, p, k, tiempos):
 
     # Pongo la cruz
     win.flip()
@@ -217,7 +218,7 @@ def anIterationOfTheExperimentGame(primera_iter, initTime, win, imagen, ISI, Sti
     win.flip()
     a = initTime.getTime()
 
-    if (imagen[k] == "./estimulo/PACMAN.png"):
+    if (imagen[k] == pacmanImage):
         marcas(q,p,marca_pacman)
     else:
         marcas(q,p,marca_fantasma)
@@ -234,7 +235,7 @@ def anIterationOfTheExperimentGame(primera_iter, initTime, win, imagen, ISI, Sti
 
     return primera_iter
 
-def anIterationOfTheGame(primera_iter, initTime, win, imagen, ISI, StimDur, initTimeStamp):
+def anIterationOfTheGame(primera_iter, initTime, win, imagen, ISI, StimDur, initTimeStamp, k):
 
     # Pongo la cruz
     win.flip()
@@ -276,12 +277,12 @@ def gameScreens(primera_iter, initTime, res, win, gris, imagen, ISI, StimDur, sh
 
     # Ciclo de cada sesion
     for k in xrange(len(shuffledStimulusList)):
-        primera_iter = anIterationOfTheGame(primera_iter, initTime, win, imagen, ISI, StimDur, initTimeStamp)
+        primera_iter = anIterationOfTheGame(primera_iter, initTime, win, imagen, ISI, StimDur, initTimeStamp, k)
 
     return primera_iter
 
 
-def experimentGameScreens(primera_iter, initTime, res, win, gris, imagen, ISI, StimDur, shuffledStimulusList, q, p):
+def experimentGameScreens(primera_iter, initTime, res, win, gris, imagen, ISI, StimDur, shuffledStimulusList, q, p, i, tiempos):
     fondo = visual.Rect(win, width=res[0]+10, height=res[1]+10, fillColor=gris, fillColorSpace='hex')
     loadInterStimulusImage(win)
 
@@ -297,8 +298,7 @@ def experimentGameScreens(primera_iter, initTime, res, win, gris, imagen, ISI, S
 
     # ciclo de cada sesion
     for k in xrange(len(shuffledStimulusList)):
-        primera_iter = anIterationOfTheExperimentGame(primera_iter, initTime, win, imagen, ISI, StimDur, initTimeStamp, q, p, marca_espacio)
-
+        primera_iter = anIterationOfTheExperimentGame(primera_iter, initTime, win, imagen, ISI, StimDur, initTimeStamp, q, p, k, tiempos)
     return primera_iter
 
 def run_training(win, proporcion, pruebas, Nsess, StimDur, ISI,res,gris,negro,blanco,stimuli,pantalla_inicio):
@@ -322,13 +322,13 @@ def run_training(win, proporcion, pruebas, Nsess, StimDur, ISI,res,gris,negro,bl
         terminar = 0
         termino_bloque = False
 
-        esperar, terminar, termino_bloque, isFirst = preparationScreens(esperar, terminar, termino_bloque, isFirst, negro, blanco, res, pantalla_inicio, win, core, Nsess)
+        esperar, terminar, termino_bloque, isFirst = preparationScreens(esperar, terminar, termino_bloque, isFirst, negro, blanco, gris, res, pantalla_inicio, win, core, Nsess, i)
 
         if not terminar:
 
                 primera_iter = True
 
-                primera_iter = gameScreens(primera_iter, initTime, win, imagen, ISI, StimDur, shuffledStimulusList)
+                primera_iter = gameScreens(primera_iter, initTime, res, win, gris, imagen, ISI, StimDur, shuffledStimulusList)
 
                 # Pongo la ultima cruz
                 win.flip()
@@ -347,9 +347,9 @@ def run_training(win, proporcion, pruebas, Nsess, StimDur, ISI,res,gris,negro,bl
     core.wait(4)
 
 def finalMark(cond):
-    if cond == 'angry':
+    if cond == angry:
         return 42
-    elif cond == 'pacman':
+    elif cond == pacman:
         return 142
     else:
         raise Exception("Invalid condition please choose 'angry' or 'pacman'")
@@ -380,13 +380,13 @@ def run_experiment(dataFile, win, proporcion, pruebas, Nsess, StimDur, ISI, q, p
         termino_bloque = False
 
         win.clearBuffer()
-        esperar, terminar, termino_bloque, isFirst, dataFile = preparationScreensExperiment(esperar, terminar, termino_bloque, isFirst, negro, blanco, res, pantalla_inicio, win, core, Nsess,dataFile)
+        esperar, terminar, termino_bloque, dataFile = preparationScreensExperiment(esperar, terminar, termino_bloque, negro, blanco, gris, res, pantalla_inicio, win, core, Nsess,dataFile, i, p, q)
 
         if not terminar:
             tiempos = []
             primera_iter = True
 
-            primera_iter = experimentGameScreens(primera_iter, initTime, res, win, gris, imagen, ISI, StimDur, shuffledStimulusList, q, p)
+            primera_iter = experimentGameScreens(primera_iter, initTime, res, win, gris, imagen, ISI, StimDur, shuffledStimulusList, q, p, i, tiempos)
 
             # Pongo la ultima cruz
             win.flip()

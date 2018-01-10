@@ -32,7 +32,7 @@ def main():
     negro = '#000000'
     blanco = '#FFFFFF'
     #win = visual.Window(res, monitor="Mi Monitor", units="pix",  color=gris, colorSpace='hex', fullscr=pantCompleta)
-    win = visual.Window(res,units="pix",  color=gris, colorSpace='hex', fullscr=pantCompleta, monitor = "marcos_monitor")
+    win = visual.Window(res,units="pix",  color=gris, colorSpace='hex', fullscr=pantCompleta, monitor = "testMonitor")
     win.setMouseVisible(False)
 
     ###########################################
@@ -70,14 +70,14 @@ def main():
 
 
 
-    cond = 'pacman'
-    stimuli = ["./estimulo/pacman.png","./estimulo/fantasma_naranja.png", "./estimulo/fantasma_rosado.png", "./estimulo/fantasma_verde.png", "./estimulo/fantasma_azul.png"]
+    cond = pacman
+    stimuli = [pacmanImage,"./estimulo/fantasma_naranja.png", "./estimulo/fantasma_rosado.png", "./estimulo/fantasma_verde.png", "./estimulo/fantasma_azul.png"]
     pantalla_inicio = "./estimulo/pantini_pacman.png"
     run_training(win, proporcion, 10, 6, StimDur, ISI,res,gris,negro,blanco,stimuli,pantalla_inicio)
     run_experiment(dataFile, win, proporcion, pruebas, Nsess, StimDur, ISI, q_marcas, ponermarcas,res,gris,negro,blanco,stimuli,pantalla_inicio,cond)
 
-    cond = 'angry'
-    stimuli = ["./estimulo/pajaro.png","./estimulo/cerdo_naranja.png", "./estimulo/cerdo_rosado.png", "./estimulo/cerdo_verde.png", "./estimulo/cerdo_azul.png"]
+    cond = angry
+    stimuli = [birdImage,"./estimulo/cerdo_naranja.png", "./estimulo/cerdo_rosado.png", "./estimulo/cerdo_verde.png", "./estimulo/cerdo_azul.png"]
     pantalla_inicio = "./estimulo/pantini_angry.png"
     run_training(win, proporcion, 10, 6, StimDur, ISI,res,gris,negro,blanco,stimuli,pantalla_inicio)
     run_experiment(dataFile, win, proporcion, pruebas, Nsess, StimDur, ISI, q_marcas, ponermarcas,res,gris,negro,blanco,stimuli,pantalla_inicio,cond)
