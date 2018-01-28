@@ -56,7 +56,7 @@ Esto instala python de 32 bits en /opt/pym32
 
 ---
 
-## 3.Compilar los binding
+## 3. Compilar los binding
 
 Para compilar, basta con ejecutar make en la carpeta ./src/emotiv. Si es linux de 64 bits:
         
@@ -64,7 +64,7 @@ Para compilar, basta con ejecutar make en la carpeta ./src/emotiv. Si es linux d
     
 Los usuarios de linux van a tener que editar el Makefile y poner el path correspondiente en la variable EMOTIV_ROOT, salvo que lo tengan instalado en /opt/Emotiv-1.0.0.5.
     
-## 4.Ejecutar un programa usando los bindings
+## 4. Ejecutar un programa usando los bindings
 
 Para ejecutar cualquier script de Python que utilice la biblioteca de Emotiv en python hay que anteponer el path de ubicación de las librerías:
     
@@ -79,15 +79,15 @@ En ese mismo directorio tienen que estar los archivos emotiv.so, Emotiv.py y Edf
 ---
 ## Posibles inconvenientes
 
-### 1.Al correr el wizard/instalador de emotiv en ubuntu 64 bits 14.04 te pide datos como usuario y demás cosas, de todas maneras hay que completarlo con el order number y la serial key.
+### 1. Al correr el wizard/instalador de emotiv en ubuntu 64 bits 14.04 te pide datos como usuario y demás cosas, de todas maneras hay que completarlo con el order number y la serial key.
     
-### 2.Si surge algun error sobre la falta de alguna libreria a pesar de que esta se encuentra en la carpeta lib de emotiv, por ejemplo ledk la cual es libedk, entonces probablemente haya que hacer un symlink entre el archivo buscado, el cual no se encontró y el archivo que si tenemos.
+### 2. Si surge algun error sobre la falta de alguna libreria a pesar de que esta se encuentra en la carpeta lib de emotiv, por ejemplo ledk la cual es libedk, entonces probablemente haya que hacer un symlink entre el archivo buscado, el cual no se encontró y el archivo que si tenemos.
     
 Para hacer esto se utiliza: 
 
         ln -s EXISTING_FILE SYMLINK_FILE
     
-### 3.En ubuntu 14.04 probablemente sea necesario instalar hal, este paquete estaba en versiones anteriores y ahora no. Al correr algun programa de emotiv quizas surja algun tipo de error como: "The narre org.freedesktop.Hal was not provided by any .service files"
+### 3. En ubuntu 14.04 probablemente sea necesario instalar hal, este paquete estaba en versiones anteriores y ahora no. Al correr algun programa de emotiv quizas surja algun tipo de error como: "The narre org.freedesktop.Hal was not provided by any .service files"
         
 Para solucionarlo se puede instalar Hal escribiendo en la terminal: 
         
@@ -95,12 +95,12 @@ Para solucionarlo se puede instalar Hal escribiendo en la terminal:
         sudo apt-get update
         sudo apt-get install hal
         
-### 4.Si falta libavbin bajar el instalador de https://avbin.github.io/AVbin/Download.html y ejecutarlo
+### 4. Si falta libavbin bajar el instalador de https://avbin.github.io/AVbin/Download.html y ejecutarlo
     
         sudo chmod +x install-avbin-linux-x86-32-v10
         sudo ./install-avbin-linux-x86-32-v10
     
-### 5.Si falta Python.h agregarlo instalando python-dev
+### 5. Si falta Python.h agregarlo instalando python-dev
 
          sudo apt-get install python-dev
         
