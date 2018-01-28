@@ -9,28 +9,27 @@ from gonogo import *
 
 def main():
     # Info de la sesion
-    expInfo = {'Nombre':'nombre', 'Nacimiento':'DD/MM/AA', 'Mano':'mano', 'Tipo':'conductual','Operador':''}
+    expInfo = {NAME:'nombre', BIRTHDATE:'DD/MM/AA', HAND:'mano', EXPERIMENT_TYPE:'conductual',OPERATOR:''}
 
     # Presento cuadro para rellenar
     dlg = gui.DlgFromDict(expInfo, title='Formulario')
     if not(dlg.OK):
         core.quit()
     else:
-        fileName = expInfo['Nombre']
+        fileName = expInfo[NAME]
         if not os.path.exists('./Datos/' + fileName):
             os.makedirs('./Datos/' + fileName)
         dataFile = open('./Datos/' + fileName + '/' + str(datetime.date.today()) + '_' +fileName+'.csv', 'a')
         nombreEDF = './Datos/' + fileName + "/" + str(datetime.date.today()) + '_' + fileName
-        texto = expInfo['Nombre'] + '; ' + str(datetime.datetime.now()) + '; ' + expInfo['Nacimiento'] + '; ' + expInfo['Mano'] + '; ' + expInfo['Tipo'] + '; ' + expInfo['Operador']
+        texto = expInfo[NAME] + '; ' + str(datetime.datetime.now()) + '; ' + expInfo[BIRTHDATE] + '; ' + expInfo[HAND] + '; ' + expInfo[EXPERIMENT_TYPE] + '; ' + expInfo[OPERATOR]
     dataFile.write(texto)
+
     ##########################
     ##  Parametros Pantalla ##
     ##########################
     res = [gtk.gdk.screen_width(), gtk.gdk.screen_height()]
     pantCompleta = True
-    gris = '#969696'
-    negro = '#000000'
-    blanco = '#FFFFFF'
+
     #win = visual.Window(res, monitor="Mi Monitor", units="pix",  color=gris, colorSpace='hex', fullscr=pantCompleta)
     win = visual.Window(res,units="pix",  color=gris, colorSpace='hex', fullscr=pantCompleta, monitor = "testMonitor")
     win.setMouseVisible(False)
@@ -47,15 +46,16 @@ def main():
     #ISI = 0.986
     StimDur = 0.404
     ISI = 0.986
+
     ponermarcas  = []
-    if expInfo['Tipo'] == 'emotiv':
+    if expInfo[EXPERIMENT_TYPE] == EMOTIV:
         from multiprocessing import Process, Queue
         import guardar
         q_marcas = Queue()
         p = Process(target = guardar.save_data, args=(nombreEDF, q_marcas, ))
         p.start()
         ponermarcas = 1
-    elif expInfo['Tipo'] == 'eeg':
+    elif expInfo[EXPERIMENT_TYPE] == TRADITIONAL_EEG:
         from parallel import Parallel # Version sugerida por Fede (ver mail 02/08/2016)
         #from psychopy import parallel
         # BIOSEMI
@@ -64,7 +64,7 @@ def main():
         q_marcas = Parallel() # Version sugerida por Fede (ver mail 02/08/2016)
         q_marcas.setData(0) # Solo para asegurarse de que arranque con todos los pins abajo
         ponermarcas = 2
-    elif expInfo['Tipo'] == 'conductual':
+    elif expInfo[EXPERIMENT_TYPE] == CONDUCTUAL:
         q_marcas = 1
         ponermarcas = 0
 
