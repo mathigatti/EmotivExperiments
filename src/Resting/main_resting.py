@@ -28,7 +28,7 @@ def experimentForm():
 		texto = expInfo[NAME] + '; ' + str(datetime.datetime.now()) + '; ' + expInfo[BIRTHDATE] + '; ' + expInfo[VIDEO] + '; ' + expInfo[EXPERIMENT_TYPE] + '; ' + expInfo[OPERATOR] 
 	dataFile.write(texto)
 
-	return expInfo
+	return expInfo, nombreEDF
 
 def chooseVideo(video):
 	if video == '0':
@@ -52,7 +52,7 @@ def setMovie(win, video):
 	print('duration=%.2fs' % movie.duration)
 	return movie
 
-def insertMarks(expInfo):
+def insertMarks(expInfo, nombreEDF):
 	ponermarcas  = []
 	if expInfo[EXPERIMENT_TYPE] == EMOTIV:
 		from multiprocessing import Process, Queue
@@ -72,14 +72,14 @@ def insertMarks(expInfo):
 	return ponermarcas, q_marcas
 
 def main():
-	expInfo = experimentForm()
+	expInfo, nombreEDF = experimentForm()
 	
 	n = chooseVideo(expInfo[VIDEO])
 
 	win = setWindow()
 	movie = setMovie(win, VIDEOS[n])
 
-	ponermarcas, q_marcas = insertMarks(expInfo)
+	ponermarcas, q_marcas = insertMarks(expInfo, nombreEDF)
 	correr_resting(win,movie,q_marcas,ponermarcas)
 	
 	win.close()
