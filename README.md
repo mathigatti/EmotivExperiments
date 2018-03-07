@@ -6,7 +6,7 @@ electrode signals, adding referential marks about experiments’ stimuli and res
 This project is part of a larger collaboration between the Unidad de Neurobiología Aplicada (CEMIC - CONICET, Argentina; http://pobrezaydesarrollocognitivo.blogspot.co.uk/p/fotos.html) and the Laboratorio de Inteligencia Artificial Aplicada (Instituto de Cs. de la Computación, Fac. de Cs. Exactas y Naturales, UBA - CONICET, Argentina; https://liaa.dc.uba.ar/). Our general goal is to study the influence of adverse environmental conditions on the organization and reorganization of the brain structure and function, and how it involves distinct neural systems at different levels of organization. Thus, we measure EEG in children from low socio-economic status contexts to evaluate the efficacy of interventions, aimed to enhance cognitive development in children facing unfavorable social conditions (see also Pietto ML, Kamienkowski JE, Lipina S "Electrophysiological approaches in the study of childhood poverty influence on cognition" (2017) book chapter in “Neuroscience and Social Science: The missing link” Springer Books).
 
 # How to cite us
-#### Please, if like it / use it cite us:
+#### Please, if you like it / use it cite us:
 Pietto ML, Gatti M, Raimondo F, Lipina SJ, and Kamienkowski JE. "Electrophysiological approaches in the study of cognitive development outside the lab" (submitted)
 #### And let us know!!
 Marcos L. Pietto (marcos.pietto (arroba) gmail (dot) com)
